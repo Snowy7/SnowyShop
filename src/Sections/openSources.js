@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, CardGroup, ListGroup, ListGroupItem } from "react-bootstrap";
 import firstProj from "../Images/quick-cursor.jpg";
-import secProj from "../Images/robot_eric.png";
+import secProj from "../Images/ai.jpg";
 
 export default class OpenSources extends Component {
   render() {
