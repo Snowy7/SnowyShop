@@ -66,7 +66,7 @@ const App = () => {
             setEmailError(err.message);
             break;
 
-          case "auth/worng-password":
+          case "auth/wrong-password":
             setPasswordError(err.message);
             break;
         }
