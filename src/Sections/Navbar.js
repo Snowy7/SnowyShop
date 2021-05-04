@@ -3,17 +3,46 @@ import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import ProfilePic from "../Images/profile.jpg";
 
 const TopBar = (props) => {
-  const { isInMain, setIsInMain, setHasAccount, handleLogOut, user } = props;
+  const {
+    isInShop,
+    setInShop,
+    isInMain,
+    setIsInMain,
+    setHasAccount,
+    handleLogOut,
+    user,
+  } = props;
+
+  const setIsInShop = (state = true) => {
+    setInShop(state);
+  };
 
   const toggleSite = () => {
+    setIsInShop(false);
     setIsInMain(!isInMain);
+  };
+
+  const openMain = () => {
+    setIsInShop(false);
+    setIsInMain(true);
+  };
+
+  const openEdit = () => {
+    setIsInShop(false);
+    setIsInMain(false);
   };
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand>
         <code
-          style={{ color: "lightblue", fontSize: 35 + "px", fontWeight: 900 }}
+          onClick={openMain}
+          style={{
+            color: "lightblue",
+            fontSize: 35 + "px",
+            fontWeight: 900,
+            cursor: "pointer",
+          }}
         >
           <span>&#60;</span>/Snowy<span>&#62;</span>
         </code>
@@ -24,21 +53,36 @@ const TopBar = (props) => {
         className="justify-content-center"
       >
         <Nav className="mr-auto">
-          <Nav.Link href="#tutorials">Shop</Nav.Link>
+          <Nav.Link href="#shop" onClick={setIsInShop}>
+            Shop
+          </Nav.Link>
           <Nav.Link href="#tutorials">Tutorials</Nav.Link>
           <Nav.Link href="#projects">Projects</Nav.Link>
-          <Nav.Link href="#freeSources" onClick={toggleSite}>
+          <Nav.Link href="#freeSources" onClick={openMain}>
             Free-Sources
           </Nav.Link>
         </Nav>
         {user ? (
           <Nav>
+            {isInShop ? (<>
+              <Button
+                  className="mr-2 navBarButton"
+                  onClick={toggleSite}
+                  href="#signin"
+                >
+                  Upload Project
+                </Button>
+            </>) : (<></>)}
             <Nav right eventKey={0} className="ProfileBtn">
               <NavDropdown title="Profile" id="basic-nav-dropdown">
-                <img className="ProfileButton" id="profilePic" src={user.photoURL} />;
-                <a>{user.displayName}</a>;{console.log(user.displayName)}
+                <img
+                  className="ProfileButton"
+                  id="profilePic"
+                  src={user.photoURL}
+                />
+                ;<a>{user.displayName}</a>;{console.log(user.displayName)}
                 <NavDropdown.Item
-                  onClick={(setHasAccount(true), toggleSite)}
+                  onClick={(setHasAccount(true), openEdit)}
                   href="#editProfile"
                 >
                   Edit Profile
@@ -50,14 +94,8 @@ const TopBar = (props) => {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Button
-              className="mr-2 navBarLogOutBtn"
-              onClick={handleLogOut}
-              href="#signin"
-            >
-              Log Out
-            </Button>
-            {!isInMain ? (
+
+            {!isInMain || isInShop ? (
               <>
                 <Button
                   className="mr-2 navBarButton"
@@ -78,7 +116,7 @@ const TopBar = (props) => {
                 <Button
                   className="mr-2 navBarButton"
                   onClick={toggleSite}
-                  href="#signin"
+                  href="#"
                 >
                   Main
                 </Button>

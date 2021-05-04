@@ -2,7 +2,7 @@ import React from "react";
 import snowy from "../Snowy.svg";
 
 const EditProfile = (props) => {
-  const {
+  let {
     username,
     setUsername,
     email,
@@ -21,6 +21,8 @@ const EditProfile = (props) => {
     inputFile,
   } = props;
 
+  username=user.displayName;
+
   return (
     <section className="editProfile">
       <img
@@ -37,10 +39,8 @@ const EditProfile = (props) => {
             </code>{" "}
             <>
               <input style={{display:"none"}} ref={inputFile} type="file" onChange={chooseFile}/>
-              
               <img id="editProfilePic" className="ProfilePic" src={user.photoURL} onClick={changeImage}/>
-
-              <label>Username</label>
+              <label>Change Username:?</label>
               <input
                 type="text"
                 autoFocus
@@ -49,25 +49,6 @@ const EditProfile = (props) => {
                 onChange={(e) => setUsername(e.target.value)}
               ></input>
               <p className="errorMsg">{usernameError}</p>
-
-              <label>Email</label>
-              <input
-                type="text"
-                autoFocus
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              ></input>
-              <p className="errorMsg">{emailError}</p>
-
-              <label>Password</label>
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></input>
-              <p className="errorMsg">{passwordError}</p>
 
               <button className="loginBtn" onClick={handleProfileUpdate}>
                 Save Changes

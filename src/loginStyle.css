@@ -11,10 +11,35 @@
     height: 60vmin;
     pointer-events: none;
   }
+
+  .editProfile .container .ProfilePic{
+    max-width: 55%;
+    max-height: 50%;
+    border-radius: 50% !important;
+    border: 2px solid white;
+    transition: border-radius ease 0.2s;
+  }
   
   @media (prefers-reduced-motion: no-preference) {
     .login-logo {
       animation: App-logo-spin infinite 20s linear;
+    }
+  }
+
+  @media only screen and (min-width: 600px){
+    .editProfile .container .ProfilePic{
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .login-logo{
+      display: none;
+    }
+    .editProfile .container .ProfilePic{
+      height: 150px;
+      width: 200px;
     }
   }
 
@@ -62,16 +87,6 @@
     background: rgba(255, 255, 255, 0.1);
     color: #fff;
     letter-spacing: 1px;
-  }
-
-  .editProfile .container .ProfilePic{
-    width: 200px !important;
-    max-width: 55% !important;
-    height: 200px !important;
-    max-height: 50% !important;
-    border-radius: 50% !important;
-    border: 2px solid white;
-    transition: border-radius ease 0.2s;
   }
 
   .editProfile .container .ProfilePic:hover{

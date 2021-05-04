@@ -260,13 +260,16 @@ const App = () => {
   return (
     <div className="App">
       <TopBar
+        isInShop={isInShop}
+        setInShop={setInShop}
         isInMain={isInMain}
         setIsInMain={setIsInMain}
         setHasAccount={setHasAccount}
         handleLogOut={handleLogOut}
         user={user}
       />
-      <Shop />
+      {isInShop ? (<Shop />) : 
+      (<>
       {!isInMain ? (
         <>
           {user ? (
@@ -333,6 +336,7 @@ const App = () => {
           <OpenSources />
         </>
       )}
+      </>)}
     </div>
   );
 };
